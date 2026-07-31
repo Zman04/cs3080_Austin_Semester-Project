@@ -16,7 +16,6 @@ class TransformerSummarizer(BaseSummarizer):
         self.max_length = max_length
         self.min_length = min_length
         self.num_beams = num_beams
-        self.model = AutoModelForSeq2SeqLM.from_pretrained(self.model_name)
 
         if device is not None:
             self.device = torch.device(device)
