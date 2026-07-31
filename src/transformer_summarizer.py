@@ -32,7 +32,7 @@ class TransformerSummarizer(BaseSummarizer):
         self.model = self.model.to(self.device)
         self.model.eval()
 
-    def summarize():
+    def summarize(self, text: str):
         inputs = {k: v.to(self.device) for k, v in inputs.items()}
 
         with torch.no_grad():
