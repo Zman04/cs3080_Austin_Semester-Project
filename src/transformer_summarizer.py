@@ -11,7 +11,7 @@ class TransformerSummarizer(BaseSummarizer):
             num_beams: int = 4,
             device: str = None
     ):
-        super().__init__()
+        super().__init__(summary_length=max_length)
         self.model_name = model_name
         self.max_length = max_length
         self.min_length = min_length
@@ -34,7 +34,7 @@ class TransformerSummarizer(BaseSummarizer):
         self.model.eval()
 
     def summarize(self, text: str):
-        
+
         inputs = self.tokenizer(
             text, 
             return_tensors="pt", 
