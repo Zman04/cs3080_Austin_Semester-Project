@@ -16,6 +16,7 @@ class TransformerSummarizer(BaseSummarizer):
         self.max_length = max_length
         self.min_length = min_length
         self.num_beams = num_beams
+        self.model = AutoModelForSeq2SeqLM.from_pretrained(self.model_name)
 
         if device is not None:
             self.device = torch.device(device)
@@ -27,12 +28,20 @@ class TransformerSummarizer(BaseSummarizer):
             self.device = torch.device("cpu")
 
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-        self.model = self.model.to(self.device)
+        self.model = AutoModelForSeq2SeqLM.from_pretrained(self.model_name)
 
         self.model = self.model.to(self.device)
         self.model.eval()
 
     def summarize(self, text: str):
+        
+        inputs = self.tokenizer(
+            text, 
+            return_tensors="pt", 
+            truncation=True, 
+            max_length=1024
+        )
+
         inputs = {k: v.to(self.device) for k, v in inputs.items()}
 
         with torch.no_grad():
