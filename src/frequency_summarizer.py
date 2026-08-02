@@ -3,15 +3,17 @@ from nltk import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 
 
-class FrequencySummarizer(BaseSummarizer):
+class FrequencySummarizer(BaseSummarizer): # Create subclass
 
-    def summarize(self, text):
+    def summarize(self, text): # 
         sentence_scores = {}
         sentences = sent_tokenize(text) # Sentences is a list of sentences
 
         stop_words = set(stopwords.words('english'))
 
         words = word_tokenize(text) # Words is a list of words including punctuation
+
+        # Clean words so that trash/dupes don't skew scores
         words_clean = [word.lower() for word in words if word.isalnum() and word.lower() not in stop_words]
 
         word_freq = {}
