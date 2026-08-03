@@ -7,9 +7,10 @@ class BaseSummarizer:
     """
     The parent blueprint for all summarization engines.
     
-    summary_length: The summary length is required for the frequency_summarizer
+    summary_length: How many sentences long the summary should be. 
+    The summary length is required for the frequency_summarizer.
     """
-    def __init__(self, summary_length: int):
+    def __init__(self, summary_length: int): # Initialization method accepts summary_length
         self.summary_length = summary_length
 
     def summarize(self, text: str):
