@@ -7,9 +7,10 @@ class TransformerSummarizer(BaseSummarizer):
             self,
             model_name: str= "facebook/bart-large-cnn", # Model configuration
             max_length: int = 150, # 150 Tokens (110 - 150 words)
-            min_length: int = 30, # 30 Tokens (20 - 30 words)
+            min_length: int = 60, # 30 Tokens (20 - 30 words)
             num_beams: int = 4, # Beam search width (Number of alternative word sequences tracked)
-            device: str = None # Default will cause us to run through from fastest to slowest
+            device: str = None, # Default will cause us to run through from fastest to slowest
+            length_penalty=2.0
     ):
         super().__init__(summary_length=max_length)
         self.model_name = model_name

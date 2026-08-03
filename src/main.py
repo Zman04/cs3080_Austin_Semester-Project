@@ -2,35 +2,33 @@
 Author: Zachary Austin
 
 '''
+import os
 
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=UserWarning)
 
 from frequency_summarizer import FrequencySummarizer
 from transformer_summarizer import TransformerSummarizer
 
 sample_text = """
 College is a hot topic these days. Some people work hard in high school to get into a good college right away. Others go to college later in life, while many never go to college at all. While it is true that some college dropouts like Bill Gates can get rich without a degree, college has been proven to be beneficial in climbing the social and economic ladders. But in U.S. society now, attending college can be burdensome in many ways. That leads to the question; is college really worth the time, effort, stress, and money? Despite the cost, college degrees can be beneficial for many people.
-
 There are many benefits to having a college degree. For example, earning potential increases with higher education. In the period between 1970 to 2013, bachelor’s degree holders earned approximately $64,500 per year. Those with an associate’s degree made about $50,000 per year, and those with only a high school diploma earned around $41,000 per year. Over those four decades, bachelor’s degree holders’ average yearly salary was 56 percent higher than the average salary of someone holding just a high school diploma(Abel, Deitz). Many people in America believe that you need a college degree to be successful because it has been shown that college graduates make more money on average than those who have not graduated from a college. In fact, college attendance is rising. In 1940, approximately 4.6 percent of Americans claimed to have a bachelor’s degree. A 2017 report from the U.S. Census Bureau said that 33.4 percent of Americans over age 25 have a bachelor’s degree or higher(Wilson).
-
 Another benefit to having a college degree is more job opportunities. According to the Bureau of Labor Statistics, in 2016, 37 percent of jobs required some form of post secondary education, and 21.3 percent required a bachelor’s degree. Employers seek out college graduates for many reasons. Those who have gone to college usually have stronger communication skills, a stronger ability to think analytically and theoretically, and good problem solving skills. They also usually have a better understanding of various subjects. These four traits stand out greatly to employers(CollegeAtlas). Having a college degree can highly improve the chances of getting hired.
-
 Better employment benefits also come with college degrees. College graduates are usually more satisfied with their jobs than people with only a highschool diploma. It is important for an individual to have a job that he or she is satisfied with because odds are, that individual will be working that job for a majority of their life(CollegeAtlas). There are multiple reasons why college graduates are more satisfied with their jobs. They can find higher paying jobs, they get accepted into job positions with job advancement opportunities, they are able to work at jobs that interest them, and they get accepted into jobs with great benefits. Studies show that about 70 percent of those with a bachelor’s degree receive health insurance from their employer, and that only 50 percent of those with just a highschool diploma receives health insurance(CollegeAtlas).
 Although there are many pros to having a college degree, there are also a few cons to consider when deciding if a college degree is worth it or not.
-
 Another negative associated with going to college is many students in college suffer from anxiety, depression, and other health problems. A study conducted in 2013 by the National College Health Assessment reported that 33 percent of the surveyed college students felt very depressed within the last 12 months. Almost 55 percent of the surveyed students said they felt intense anxiety, and 87 percent said they felt overwhelmed by their responsibilities. About 9 percent of the surveyed students seriously considered suicide(healthline). Thankfully many campuses offer mental health screenings and outreach programs. These types of services can assist students and help them cope with their problems(Forbes). Universities across the nation are becoming increasingly aware of the benefits in helping boost the mental well being of the students on campus(Forbes).
-
 Although college can have a negative impact on one’s health while he is attending a college, college has a positive impact on one’s life after graduation. According to the Robert Wood Johnson Foundation, college graduates usually live at least 5 years longer than those who have not finished high school(RWJF). Those with four more years of education after high school are also less likely to be obese or overweight, as well as being less likely to smoke. They are also more likely to participate in physical activity. Since college graduates tend to have good paying jobs, they are generally able to afford healthy foods and gym memberships to improve physical and mental well being. Those who earn a college degree also tend to have healthier children. Research shows that if parents have a college education, their children usually are better off socially and economically(CollegeAtlas). 
-
 Studies have also shown that when at least one of a child’s parents has a college degree, the child himself will be more likely to get a college degree(CollegeAtlas). 
-
 It is no secret that whether or not to go to college is an important decision. On one hand, college can open up many opportunities and enhance the student’s life. Pursuing higher education  often introduces the individual to new ideas and teaches new skills necessary to succeed in the world. On the other hand it can be a source of frustration and stress. If someone has to take out a lot of loans just to go to college and he does not even finish the schooling, then it can take a very long time to repay all of the loans. Regardless, studies have often shown that college, if planned for correctly, can be an extremely positive route to take in life. Increased education can improve a person’s financial health, satisfaction level in life, and the physical and mental health of him and his family. As long as a person takes his life situation into consideration and comes up with a sound financial plan to pay for college, college can be a good decision in the long run.
-
-
-
 """
-
+print("Frequency Summary:")
 freq_sum = FrequencySummarizer(2)
 print(freq_sum.summarize(sample_text))
 
+print("\nTransformer Summary:")
 trans_sum = TransformerSummarizer(device="cpu")
 print(trans_sum.summarize(sample_text))
